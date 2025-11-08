@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <title>Chat</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <style>
+        body{font-family:Arial,Helvetica,sans-serif;margin:16px}
+        #chat{max-width:800px;margin:0 auto}
+        #messages{border:1px solid #ddd;height:400px;overflow:auto;padding:8px;background:#fafafa}
+        .msg{margin:6px 0;padding:6px;border-radius:6px}
+        .msg.me{background:#e1ffc7;text-align:right}
+        .msg.other{background:#fff}
+        #controls{display:flex;gap:8px;margin-top:8px}
+        #message{flex:1;padding:8px}
+    </style>
+</head>
+<body>
+<div id="chat">
+    <h2>Chat</h2>
+    <div>Chatting with: <b th:text="${withUser}"></b></div>
+    <div>
+        <label>Username: <input id="username" th:value="${me}" readonly /></label>
+        <input type="hidden" id="recipient" th:value="${withUser}" />
+        <button id="connectBtn">Connect</button>
+        <button id="disconnectBtn" disabled>Disconnect</button>
+    </div>
+    <div id="messages"></div>
+    <div id="controls">
+        <input id="message" placeholder="Type a message..." />
+        <button id="sendBtn" disabled>Send</button>
+    </div>
+</div>
+
+<!-- Must load sockjs-client before stomp -->
+<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/stompjs@2.3.3/lib/stomp.min.js"></script>
+<script src="/chat.js"></script>
+</body>
+</html>

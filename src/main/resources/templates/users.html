@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Users</title>
+    <style>body{font-family:Arial;padding:20px} ul{list-style:none;padding:0} li{margin:6px 0}</style>
+</head>
+<body>
+<h2>Users</h2>
+<div>Logged in as <b th:text="${me}"></b> | <a th:href="@{/logout}">Logout</a></div>
+<ul>
+    <li th:each="u : ${users}" th:if="${u.username} != ${me}">
+        <span th:text="${u.displayName != null ? u.displayName : u.username}"></span>
+        &nbsp;(<span th:text="${u.username}"></span>)
+        &nbsp; - <a th:href="@{|/chat?with=${u.username}|}">Chat</a>
+    </li>
+</ul>
+</body>
+</html>
